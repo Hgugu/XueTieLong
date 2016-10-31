@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>验证码验证页</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <script src="js/autoFont.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearFix">
+    <img src="images/dfxtl.png" class="header_text"/>
+    <img src="images/logo.png" class="header_logo"/>
+</div>
+
+<form method="post" action="turntable.html">
+    <div class="verification">
+        <dl>
+            <dt></dt>
+            <dd>
+                <input type="text" class="ver-text" id="ver"/>
+                <input type="button" class="ver-btn" value="点击发送验证码"/>
+            </dd>
+        </dl>
+    </div>
+    <input class="btn ver-submit" value="确认" type="submit" />
+</form>
+
+<div class="verBottom"></div>
+<script src="js/zepto.min.js"></script>
+<script>
+    $('form').submit(function(){
+        var varVal= $.trim($('#ver').val());
+
+        if(varVal=='')
+        {
+            alert('请输入验证码！');
+            return false;
+        }
+    });
+//    var btnNode=$(".ver-btn");
+//    btnNode.click(function(){//不能使用触屏事件
+//        btnNode.val("60秒后重新发送");
+//        btnNode.css({background:"#c4c6c6"});
+//        btnNode.attr("disabled", true);
+//    });
+//    timeGo();
+//    window.setInterval(function(){
+//        timeGo();
+//    },1000);
+//    function timeGo() {
+//        var btnVal=btnNode.val();
+//        console.log(btnVal);
+//        var num=parseFloat(btnVal.substr(0,2));
+//        num--;
+//        if (num >0) {
+//            btnNode.val(num + "秒后重新发送");
+//            btnNode.css({background:"#c4c6c6"});
+//            btnNode.attr("disabled", true);
+//        }else if(num==0){
+//            btnNode.val("点击发送验证码");
+//            btnNode.css({background:"#104848"});
+//            btnNode.attr("disabled", false);
+//        }
+//    }
+    var btnNode=document.querySelector('.ver-btn');
+    btnNode.onclick=function(){
+        btnNode.value='60秒后重新发送';
+        btnNode.style.background='#c4c6c6';
+        btnNode.disabled=true;
+    };
+//    timeGo();
+    window.setInterval(function(){
+        timeGo();
+    },1000);
+    function timeGo(){
+        var btnVal=btnNode.value;
+        var num=parseFloat(btnVal.slice(0,2));
+        num--;
+        if(num>0){
+            btnNode.value=num+'秒后重新发送';
+            btnNode.style.background='#c4c6c6';
+            btnNode.disabled=true;
+        }else if(num==0){
+            btnNode.value='点击发送验证码';
+            btnNode.style.background='#104848';
+            btnNode.disabled=false;
+        }
+    }
+
+
+</script>
+</body>
+</html>

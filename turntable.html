@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>转盘抽奖</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <script src="js/autoFont.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+
+<div id="header" class="clearFix">
+    <img src="images/dfxtl.png" class="header_text"/>
+    <img src="images/logo.png" class="header_logo"/>
+</div>
+
+
+<div id="turntable">
+    <dl class="table">
+        <dt></dt>
+        <dd>
+            <img src="images/table-btn.png" class="table-btn"/>
+            <img src="images/table.png" class="table-table"/>
+        </dd>
+    </dl>
+</div>
+
+<div class="thankyou" style="display: none;">
+    <img src="images/glass.jpg" class="glass"/>
+    <a href="https://citroen.tmall.com/"><img src="images/sorry.jpg" class="sorry"/></a>
+</div>
+
+<form class="price" style="display: none;" method="post" action="success.html">
+    <div class="price-img"></div>
+    <div class="price-main">
+        <h4>东风雪铁龙官方旗舰店
+            商品优惠券</h4>
+        <span>截止2016.4.15前有效</span>
+        <h3>￥<span>499</span></h3>
+        <i>满499元使用</i>
+    </div>
+
+    <input class="btn" value="确认提交" type="submit" />
+</form>
+
+
+<div class="table-bottom"></div>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/zepto-touch.js"></script>
+<script>
+    var btnNode=$(".table-btn");
+    var tableNode=$(".table-table");
+    var alertVal;
+    var formNode=$("form");
+    var bool=false;
+    function priceChange(price){
+        window.setTimeout(function(){
+            $('#turntable').hide();
+            $('.price').show();
+            $(".table-bottom").hide();
+        },5100);
+        $(".price-main h3 span").html(price);
+    }
+    btnNode.tap(function goAround(){
+        console.log(bool);
+        $.ajax({
+            type:"get",
+            url:"index.html",
+            success:function(deg,price){
+                var oodsNum=Math.floor(Math.random()*5+1);//随机从1-5抓取
+                console.log(oodsNum);
+                if(oodsNum==1){
+                    alertVal="一等奖:499元优惠券";
+                    deg=1080;
+                    priceChange(499)
+                }
+                else if(oodsNum==2){
+                    deg=1368;
+                    alertVal="二等奖:300元优惠券";
+                    priceChange(300)
+                }
+                else if(oodsNum==3){
+                    deg=1296;
+                    alertVal="三等奖:150元优惠券";
+                    priceChange(150)
+                }
+                else if(oodsNum==4){
+                    deg=1224;
+                    alertVal="四等奖:100元优惠券";
+                    priceChange(100)
+                }
+                else if(oodsNum==5){
+                    deg=1152;
+                    alertVal="谢谢参与";
+                    window.setTimeout(function(){
+                        $('#turntable').hide();
+                        $('.thankyou').show();
+                    },5100);
+                }
+                tableNode.css({"transition":"all 5s","-webkit-transition":"all 5s","transform":"rotate("+deg+"deg)","-webkit-transform":"rotate("+deg+"deg)"});
+                if(window.localStorage){//本地储存
+                    localStorage.alertVal=alertVal;
+                }
+                console.log(localStorage.alertVal);
+                bool=true;
+            },
+            error:function(){
+                alert("服务忙，请稍后重试");
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>留资</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <script src="js/autoFont.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearFix">
+    <img src="images/dfxtl.png" class="header_text"/>
+    <img src="images/logo.png" class="header_logo"/>
+</div>
+
+<div id="index-main">
+    <dl class="description">
+        <dt></dt>
+        <dd>在3月10日至4月15日期间，所有在东风雪铁龙支付宝服务窗正确填写个人信息的客户，均可参与迎春体验季活动；活动内容包括：购车订金随机减、全系试驾送豪礼、备附件礼券送不停。</dd>
+    </dl>
+</div>
+
+<form method="post" action="verification.html">
+    <ul id="index-form">
+        <li><span>姓名</span><input type="text" id="name"/></li>
+        <li><span>联系方式</span><input type="text" id="tel"/></li>
+        <li>
+            <span>选择网店</span>
+            <label class="select">
+                <span class="span-bg">请选择省份</span>
+                <select id="province">
+                    <option value="0" selected="selected">请选择省份</option>
+                </select>
+            </label>
+            <label class="select">
+                <span class="span-bg">请选择城市</span>
+                <select id="city">
+                    <option value="0" selected="selected">请选择城市</option>
+                </select>
+            </label>
+        </li>
+        <li style="border-bottom: 0 none;">
+            <label class="select1">
+                <span class="span-bg">请选择网点</span>
+                <select id="dots">
+                    <option value="">请选择网点</option>
+                </select>
+            </label>
+            <input id="address" type="hidden" value="" />
+            <input id="comTel" type="hidden" value="" />
+            <input id="code" type="hidden" value="" />
+        </li>
+    </ul>
+
+    <div class="index-map" id="allmap"></div>
+
+    <input class="btn" value="确认提交" type="submit" />
+</form>
+<script src="js/zepto.min.js"></script>
+<script src="js/location_chs.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UQnbZLu09UR0Zz0UxzMyWIN4"></script>
+<script src="js/js.js"></script>
+</body>
+</html>
